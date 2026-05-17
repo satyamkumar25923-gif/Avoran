@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ShoppingCart, User, Search, Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useCart } from '../context/CartContext';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { cartCount, setIsCartOpen } = useCart();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -57,20 +59,32 @@ const Navbar = () => {
           <Link to="/login" className="text-dark hover:text-primary transition-colors">
             <User size={20} />
           </Link>
-          <Link to="/cart" className="text-dark hover:text-primary transition-colors relative">
+          <button 
+            onClick={() => setIsCartOpen(true)} 
+            className="text-dark hover:text-primary transition-colors relative cursor-pointer"
+          >
             <ShoppingCart size={20} />
-            <span className="absolute -top-2 -right-2 bg-primary text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">
-              0
-            </span>
-          </Link>
+            {cartCount > 0 && (
+              <span className="absolute -top-2 -right-2 bg-primary text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">
+                {cartCount}
+              </span>
+            )}
+          </button>
         </div>
 
         {/* Mobile Menu Toggle */}
         <div className="md:hidden flex items-center space-x-4">
-          <Link to="/cart" className="text-dark relative">
+          <button 
+            onClick={() => setIsCartOpen(true)} 
+            className="text-dark relative cursor-pointer"
+          >
             <ShoppingCart size={22} />
-            <span className="absolute -top-2 -right-2 bg-primary text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">0</span>
-          </Link>
+            {cartCount > 0 && (
+              <span className="absolute -top-2 -right-2 bg-primary text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">
+                {cartCount}
+              </span>
+            )}
+          </button>
           <button onClick={() => setMobileMenuOpen(true)} className="text-dark">
             <Menu size={24} />
           </button>

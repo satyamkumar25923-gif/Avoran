@@ -2,8 +2,42 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useCart } from '../context/CartContext';
 
 const Home = () => {
+  const { addToCart } = useCart();
+
+  const products = [
+    {
+      id: 'prod_1',
+      name: 'Royal Elephant Glass Art',
+      price: 3499,
+      image: '/glass_painting.png',
+      badge: null
+    },
+    {
+      id: 'prod_2',
+      name: 'Terracotta Warli Pot',
+      price: 1899,
+      image: '/pot_art.png',
+      badge: 'Bestseller'
+    },
+    {
+      id: 'prod_3',
+      name: 'Brass Mandala Wall Decor',
+      price: 5200,
+      image: '/wall_decor.png',
+      badge: null
+    },
+    {
+      id: 'prod_4',
+      name: 'Handcrafted Diyas Set',
+      price: 899,
+      image: '/hero_bg.png',
+      badge: null
+    }
+  ];
+
   return (
     <div className="w-full">
       {/* Hero Section */}
@@ -130,54 +164,28 @@ const Home = () => {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {/* Dummy Product 1 */}
-            <div className="group">
-              <div className="relative aspect-[4/5] overflow-hidden bg-gray-100 mb-4">
-                <img src="/glass_painting.png" alt="Royal Elephant Glass Art" className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500" />
-                <div className="absolute bottom-0 left-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <button className="w-full bg-white bg-opacity-90 text-dark py-3 font-medium uppercase text-sm tracking-wider hover:bg-primary hover:text-white transition-colors">Add to Cart</button>
+            {products.map((product) => (
+              <div key={product.id} className="group">
+                <div className="relative aspect-[4/5] overflow-hidden bg-gray-100 mb-4 shadow-sm border border-dark border-opacity-5">
+                  <img src={product.image} alt={product.name} className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500" />
+                  {product.badge && (
+                    <div className="absolute top-4 left-4 bg-accent text-white text-[10px] font-bold px-2.5 py-1 uppercase tracking-wider shadow-sm">
+                      {product.badge}
+                    </div>
+                  )}
+                  <div className="absolute bottom-0 left-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <button 
+                      onClick={() => addToCart(product)}
+                      className="w-full bg-white bg-opacity-90 text-dark py-3 font-semibold uppercase text-xs tracking-widest hover:bg-primary hover:text-white transition-colors cursor-pointer shadow-md"
+                    >
+                      Add to Cart
+                    </button>
+                  </div>
                 </div>
+                <h3 className="font-heading font-semibold text-sm text-dark mb-1 tracking-wide">{product.name}</h3>
+                <p className="text-primary font-bold text-sm">₹{product.price.toLocaleString('en-IN')}</p>
               </div>
-              <h3 className="font-heading font-semibold text-lg text-dark mb-1">Royal Elephant Glass Art</h3>
-              <p className="text-primary font-medium">₹3,499</p>
-            </div>
-
-            {/* Dummy Product 2 */}
-            <div className="group">
-              <div className="relative aspect-[4/5] overflow-hidden bg-gray-100 mb-4">
-                <img src="/pot_art.png" alt="Terracotta Warli Pot" className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500" />
-                <div className="absolute top-4 left-4 bg-accent text-white text-xs font-bold px-2 py-1 uppercase tracking-wider">Bestseller</div>
-                <div className="absolute bottom-0 left-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <button className="w-full bg-white bg-opacity-90 text-dark py-3 font-medium uppercase text-sm tracking-wider hover:bg-primary hover:text-white transition-colors">Add to Cart</button>
-                </div>
-              </div>
-              <h3 className="font-heading font-semibold text-lg text-dark mb-1">Terracotta Warli Pot</h3>
-              <p className="text-primary font-medium">₹1,899</p>
-            </div>
-
-            {/* Dummy Product 3 */}
-            <div className="group">
-              <div className="relative aspect-[4/5] overflow-hidden bg-gray-100 mb-4">
-                <img src="/wall_decor.png" alt="Brass Mandala Setup" className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500" />
-                <div className="absolute bottom-0 left-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <button className="w-full bg-white bg-opacity-90 text-dark py-3 font-medium uppercase text-sm tracking-wider hover:bg-primary hover:text-white transition-colors">Add to Cart</button>
-                </div>
-              </div>
-              <h3 className="font-heading font-semibold text-lg text-dark mb-1">Brass Mandala Wall Decor</h3>
-              <p className="text-primary font-medium">₹5,200</p>
-            </div>
-
-            {/* Dummy Product 4 */}
-            <div className="group">
-              <div className="relative aspect-[4/5] overflow-hidden bg-gray-100 mb-4">
-                <img src="/hero_bg.png" alt="Handcrafted Diyas Set" className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500" />
-                <div className="absolute bottom-0 left-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <button className="w-full bg-white bg-opacity-90 text-dark py-3 font-medium uppercase text-sm tracking-wider hover:bg-primary hover:text-white transition-colors">Add to Cart</button>
-                </div>
-              </div>
-              <h3 className="font-heading font-semibold text-lg text-dark mb-1">Handcrafted Diyas Set</h3>
-              <p className="text-primary font-medium">₹899</p>
-            </div>
+            ))}
           </div>
           
           <div className="mt-8 text-center md:hidden">
