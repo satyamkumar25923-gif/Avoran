@@ -12,28 +12,28 @@ const Home = () => {
       id: 'prod_1',
       name: 'Royal Elephant Glass Art',
       price: 3499,
-      image: '/glass_painting.png',
+      image: '/glass_painting.webp',
       badge: null
     },
     {
       id: 'prod_2',
       name: 'Terracotta Warli Pot',
       price: 1899,
-      image: '/pot_art.png',
+      image: '/pot_art.webp',
       badge: 'Bestseller'
     },
     {
       id: 'prod_3',
       name: 'Brass Mandala Wall Decor',
       price: 5200,
-      image: '/wall_decor.png',
+      image: '/wall_decor.webp',
       badge: null
     },
     {
       id: 'prod_4',
       name: 'Handcrafted Diyas Set',
       price: 899,
-      image: '/hero_bg.png',
+      image: '/hero_bg.webp',
       badge: null
     }
   ];
@@ -45,9 +45,10 @@ const Home = () => {
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <img 
-            src="/hero_bg.png" 
+            src="/hero_bg.webp" 
             alt="Avoran Indian Crafts" 
             className="w-full h-full object-cover object-center"
+            fetchpriority="high"
           />
           <div className="absolute inset-0 bg-dark bg-opacity-40"></div>
           {/* Subtle gradient overlay for extra premium feel */}
@@ -98,7 +99,7 @@ const Home = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Category 1 */}
             <Link to="/category/glass-paintings" className="group relative h-96 overflow-hidden flex items-end justify-center shadow-lg">
-              <img src="/glass_painting.png" alt="Glass Paintings" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+              <img src="/glass_painting.webp" alt="Glass Paintings" loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
               <div className="absolute inset-0 bg-gradient-to-t from-dark/80 via-dark/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
               <div className="relative z-10 p-8 text-center w-full transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                 <h3 className="text-2xl font-heading font-bold text-light mb-2 tracking-wide">Glass Paintings</h3>
@@ -108,7 +109,7 @@ const Home = () => {
 
             {/* Category 2 */}
             <Link to="/category/pot-art" className="group relative h-96 overflow-hidden flex items-end justify-center shadow-lg">
-              <img src="/pot_art.png" alt="Pot Art" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+              <img src="/pot_art.webp" alt="Pot Art" loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
               <div className="absolute inset-0 bg-gradient-to-t from-dark/80 via-dark/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
               <div className="relative z-10 p-8 text-center w-full transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                 <h3 className="text-2xl font-heading font-bold text-light mb-2 tracking-wide">Pottery & Clay Art</h3>
@@ -118,7 +119,7 @@ const Home = () => {
 
             {/* Category 3 */}
             <Link to="/category/wall-decor" className="group relative h-96 overflow-hidden flex items-end justify-center shadow-lg">
-              <img src="/wall_decor.png" alt="Wall Decor" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+              <img src="/wall_decor.webp" alt="Wall Decor" loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
               <div className="absolute inset-0 bg-gradient-to-t from-dark/80 via-dark/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
               <div className="relative z-10 p-8 text-center w-full transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                 <h3 className="text-2xl font-heading font-bold text-light mb-2 tracking-wide">Brass & Wall Decor</h3>
@@ -145,7 +146,7 @@ const Home = () => {
           </div>
           <div className="md:w-1/2 relative h-96 w-full">
              <div className="absolute inset-0 bg-primary opacity-20 transform translate-x-4 translate-y-4"></div>
-             <img src="/hero_bg.png" alt="Artisan Handcrafting" className="relative z-10 w-full h-full object-cover shadow-2xl filter grayscale hover:grayscale-0 transition-all duration-700" />
+             <img src="/hero_bg.webp" alt="Artisan Handcrafting" loading="lazy" className="relative z-10 w-full h-full object-cover shadow-2xl filter grayscale hover:grayscale-0 transition-all duration-700" />
           </div>
         </div>
       </section>
@@ -167,7 +168,7 @@ const Home = () => {
             {products.map((product) => (
               <div key={product.id} className="group">
                 <div className="relative aspect-[4/5] overflow-hidden bg-gray-100 mb-4 shadow-sm border border-dark border-opacity-5">
-                  <img src={product.image} alt={product.name} className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500" />
+                  <img src={product.image} alt={product.name} loading="lazy" className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500" />
                   {product.badge && (
                     <div className="absolute top-4 left-4 bg-accent text-white text-[10px] font-bold px-2.5 py-1 uppercase tracking-wider shadow-sm">
                       {product.badge}
